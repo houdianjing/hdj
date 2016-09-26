@@ -1,0 +1,97 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="Keywords" content="{$keywords}" />
+<meta name="Description" content="{$description}" />
+<meta name="renderer" content="webkit" />
+<meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+<!-- TemplateBeginEditable name="doctitle" -->
+<title>{$page_title}</title>
+<!-- TemplateEndEditable -->
+<!-- TemplateBeginEditable name="head" -->
+<!-- TemplateEndEditable -->
+<link rel="shortcut icon" href="favicon.ico" />
+<link rel="icon" href="animated_favicon.gif" type="image/gif" />
+<link rel="alternate" type="application/rss+xml" title="RSS|{$page_title}" href="{$feed_url}" />
+<link rel="stylesheet" type="text/css" href="themes/68ecshopcom_360buy/css/index.css" />
+<script type="text/javascript" src="themes/68ecshopcom_360buy/js/jquery-1.9.1.min.js"></script>
+<script type="text/javascript" src="themes/68ecshopcom_360buy/js/jump.js"></script>
+<script type="text/javascript" src="themes/68ecshopcom_360buy/js/tab.js"></script>
+<script type="text/javascript">
+var compare_no_goods = "{$lang.compare_no_goods}";
+var btn_buy = "{$lang.btn_buy}";
+var is_cancel = "{$lang.is_cancel}";
+var select_spe = "{$lang.select_spe}";
+</script>
+{insert_scripts files='jquery.json.js,transport.js'}
+{insert_scripts files='common.js,index.js'}
+</head>
+<body>
+	<!-- #BeginLibraryItem "/library/page_header_index.lbi" --><!-- #EndLibraryItem -->
+    <div class="banner">
+		<!-- #BeginLibraryItem "/library/index_ad.lbi" --><!-- #EndLibraryItem -->
+        <!-- TemplateBeginEditable name="首页广告限时抢购" -->
+<!-- TemplateEndEditable -->
+    </div>
+    <!-- #BeginLibraryItem "/library/index_ad_groups.lbi" --><!-- #EndLibraryItem -->
+    <!-- TemplateBeginEditable name="店铺街" -->
+<!-- TemplateEndEditable -->
+    <div class="w1210 index-sale">
+			<!-- #BeginLibraryItem "/library/stores_tab.lbi" --><!-- #EndLibraryItem -->
+			<!-- #BeginLibraryItem "/library/recommend_promotion.lbi" --><!-- #EndLibraryItem -->
+			<!-- #BeginLibraryItem "/library/recommend_hot_sale.lbi" --><!-- #EndLibraryItem -->
+			<!-- #BeginLibraryItem "/library/recommend_hot.lbi" --><!-- #EndLibraryItem -->
+			<!-- #BeginLibraryItem "/library/recommend_best.lbi" --><!-- #EndLibraryItem -->
+			<!-- #BeginLibraryItem "/library/recommend_new.lbi" --><!-- #EndLibraryItem -->					
+	</div>
+    <div class="w1210 floor-list">
+		<div class="floor"></div>
+		<!-- TemplateBeginEditable name="商品分类楼层" -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- #BeginLibraryItem "/library/cat_goods.lbi" --><!-- #EndLibraryItem -->
+<!-- TemplateEndEditable -->
+	</div>
+    <script type="text/javascript" src="themes/68ecshopcom_360buy/js/indexPrivate.min.js"></script>
+    <!-- #BeginLibraryItem "/library/right_sidebar.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/page_footer_index.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/arrive_notice.lbi" --><!-- #EndLibraryItem -->
+    <!-- #BeginLibraryItem "/library/left_sidebar.lbi" --><!-- #EndLibraryItem -->
+</body>
+<script type="text/javascript" src="themes/68ecshopcom_360buy/js/home_index.js"></script>
+<script type="text/javascript">
+	$(".brand-con").hover(function(){
+		var num = $(this).find("li").length;
+		if(num > 10){
+			$(this).find(".brand-btn").fadeTo('fast',0.4);	
+		}
+	},
+	function(){
+		$(this).find(".brand-btn").fadeTo('fast',0);	
+	})
+	// 鼠标移上商品图片变大
+	$('.goods img').hover(function() {
+		$(this).parent().css({
+			'width': '140px',
+			'height': '140px',
+			'overflow':'hidden',
+			'display':'block',
+			'margin':'0 auto 10px'
+		});
+		$(this).stop(true).animate({'width':'150px','height':'150px'}, 300)
+	}, function() {
+		$(this).stop(true).animate({'width':'140px','height':'140px'}, 300)
+	});
+	// $(".goods img").bubbleup({scale:160})
+
+
+
+
+</script>
+</html>

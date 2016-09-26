@@ -1,0 +1,8 @@
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<div class="shop_txt">
+	<a class="shop_txt_a" href="flow.php">
+	    <div class="span">购物车</div>
+	    <i class="cart"></i>
+    </a>	
+    <span class="ECS_CARTINFO">{insert name='cart_info'}</span>
+</div>

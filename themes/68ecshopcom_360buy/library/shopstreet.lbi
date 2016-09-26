@@ -1,0 +1,21 @@
+ <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<?php
+ $GLOBALS['smarty']->assign('shop_street',get_advlist('首页店铺展示广告',1));
+?>
+ <div class="w1210 store-wall">
+	<a class="store-wall-title" href="stores.php" title="前往店铺街">店铺街<span>推荐店铺</span></a>
+    <div class="store-wall-content">
+		<div class="store-wall-ad">
+			<!--{if $shop_street}-->
+			<!--{foreach from=$shop_street item=ad}--> 
+			<div>
+	          <a target="_blank" href="{$ad.url}"><img width="242px" height="350px" src="{$ad.image}" /></a> 
+	        </div> 
+	        <!--{/foreach}-->
+			<!-- {/if} -->
+		</div>
+		<div id="index-store" class="store-wall-con">
+            {insert name='supplier_list'}
+        </div>
+	</div>
+</div>
