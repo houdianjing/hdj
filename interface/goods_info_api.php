@@ -7,8 +7,8 @@
  * Time: 11:54
  */
 
-/* 搜索接口说明
- *   返回所有商品：/interface/goods_info_api.php?action=info&id=6&uid=61
+/* 商品详情接口说明
+ *   返回所有商品：/interface/goods_info_api.php?action=info&id=100&uid=61
  *   post参数
  *      action：info:获取产品信息 必填
  *          id：获取产品id 必填
@@ -34,7 +34,7 @@ if( !in_array( $action, $actionslist )){
     $result = array('code' => 1, 'msg' => '非法的url提交');
     exit(json_encode( $result ) );
 }
-
+//
 ////key值验证
 //$key = $_REQUEST['sign'];
 //$calucatekey = sortMap($_GET);
@@ -70,21 +70,29 @@ if($action=='info') {
     }
     $arr['goods_id']         = $goods['goods_id'];  //商品id
     $arr['goods_name']       = $goods['goods_name'];  //商品名称
+    $arr['goods_brand']       = $goods['goods_brand'];  //商品名称
     $arr['goods_number']     = $goods['goods_number'];  //商品可用量
-    $arr['is_promote']       = $goods['is_promote'];  //商品是否促销
     $arr['is_new']           = $goods['is_new'];  //商品是否新品
     $arr['is_hot']           = $goods['is_hot'];  //商品是否热销
     $arr['is_best']          = $goods['is_best'];  //商品是否精品
     $arr['goods_brief']      = $goods['goods_brief'];  //商品简单描述
     $arr['goods_style_name'] = add_style($goods['goods_name'],$goods['goods_name_style']);  //商品名称 加style
-    $arr['market_price']     = price_format($goods['market_price']);  //商品市场价格
-    $arr['shop_price']       = price_format($goods['shop_price']);  //商品价格，可忽略 用rank_price
-    $arr['rank_price']       = price_format($goods['rank_price']); // //商品价格  已根据等级折扣计算
-    $arr['type']             = $goods['goods_type'];  //商品所属类型
+    $arr['market_price']     = price_format($goods['market_price'],false);  //商品市场价格
+    $arr['shop_price']       = price_format($goods['shop_price'],false);  //商品价格，可忽略 用rank_price
+    $arr['rank_price']       = price_format($goods['rank_price'],false); // //商品价格  已根据等级折扣计算
+    $arr['exclusive']         = $goods['exclusive'];  //商品手机专享价
+    $arr['is_promote']       = $goods['is_promote'];  //商品是否促销
     $arr['promote_price']    = ($goods['promote_price'] > 0) ? price_format($goods['promote_price']) : '';  //商品促销价格
+    $arr['promote_start_date']       = $goods['promote_start_date'];  //商品促销截止时间
+    $arr['promote_end_date']       = $goods['promote_end_date'];  //商品促销截止时间
+    $arr['is_buy']       = $goods['is_buy'];  //商品是否限购
+    $arr['buymax']       = $goods['buymax'];  //商品限购数量
+    $arr['buymax_start_date']       = $goods['buymax_start_date'];  //商品限购开始
+    $arr['buymax_end_date']       = $goods['buymax_end_date'];  //商品限购结束
+    $arr['type']             = $goods['goods_type'];  //商品所属类型
     $arr['goods_thumb']      = "http://".$weburl."/".get_image_path($goods['goods_id'], $goods['goods_thumb'], true);  //商品小图
     $arr['goods_img']        = "http://".$weburl.'/'.get_image_path($goods['goods_id'], $goods['goods_img']);  //商品大图
-    $arr['url']              = "http://".$weburl.'/'.build_uri('goods', array('gid'=>$goods['goods_id']), $row['goods_name']); //商品url
+    $arr['url']              = "http://".$weburl.'/mobile/'.build_uri('goods', array('gid'=>$goods['goods_id']), $row['goods_name']); //商品url
     $arr['click_count']      = $goods['click_count'];  //商品浏览次数
     $arr['give_integral']      = $give_integral;  //商品购买赠送积分
     $arr['goods_weight']      = $goods['goods_weight']; //商品重量
@@ -92,17 +100,17 @@ if($action=='info') {
     $arr['comment_rank']      = $goods['comment_rank']; //商品星级 1星到5星
     $arr['supplier'] = $goods['supplier_id'];  //商品所属店铺id 0为自营
     $arr['rank_discount'] = number_format(($arr['shop_price']/$arr['market_price'])*10,1);  //会员折扣
+    $arr['sales_num']=selled_count($goods['goods_id']); //商品销售数量
+    $arr['Comments_num']=get_evaluation_sum($goods['goods_id']); //商品评价数量
     $arr['img_gallery'] = get_mygoods_gallery($goods['goods_id'],$weburl); //商品图片列表
     $arr['promote_info'] =  get_promotion_info($goods['goods_id'],$goods['supplier_id']);//商品促销信息
     $arr['rank_price_list'] =  get_user_rank_prices($goods['goods_id'], $goods['shop_price']); //商品会员等级价格
     $arr['goods_specification'] =  $properties = get_goods_properties($goods['goods_id']); //商品规格属性
-    $arr['sales_num']=selled_count($goods['goods_id']); //商品销售数量
-    $arr['Comments_num']=get_evaluation_sum($goods['goods_id']); //商品评价数量
     $arr['goods_desc']=goods_desc_cl($goods['goods_desc'],$weburl); //商品描述
+    //print_r($arr);
     $result = array('code'=>103,'msg' => '成功获取商品信息','data' =>$arr);
     exit(json_encode($result));
 }
-
 
 /**
  * 处理产品描述图片网址
@@ -211,6 +219,7 @@ function  get_mygoods_info($goods_id,$user_rank=0,$user_discount=1)
         {
             $promote_price = 0;
         }
+
         /* 处理商品水印图片 */
         $watermark_img = '';
 
