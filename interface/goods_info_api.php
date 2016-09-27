@@ -322,6 +322,6 @@ function get_myuser_info($id=0)
 
     return $user;
 }
-function tttttt(){
+function test(){
 	
 }
